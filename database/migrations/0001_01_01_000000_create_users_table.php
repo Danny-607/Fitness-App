@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('weight');
             $table->integer('height');
             $table->date('date_of_birth');
-            $table->integer('amount_of_exercise');
+            $table->integer('activity_level');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

@@ -3,9 +3,13 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Meal;
+use App\Models\Workout;
+use App\Models\Exercise;
+use App\Models\DailyMeal;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -20,6 +24,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'date_of_birth',
+        'weight',
+        'height',
+        'gender',
+        'activity_level',
     ];
 
     /**
@@ -43,5 +52,25 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function meals()
+    {
+        return $this->hasMany(Meal::class);
+    }
+
+    public function dailyMeals()
+    {
+        return $this->hasMany(DailyMeal::class);
+    }
+
+    public function exercises()
+    {
+        return $this->hasMany(Exercise::class);
+    }
+
+    public function workout()
+    {
+        return $this->hasMany(Workout::class);
     }
 }
