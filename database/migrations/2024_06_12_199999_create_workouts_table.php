@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('workouts', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('exercise_id')->references('id')->on('exercises');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('exercise_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
