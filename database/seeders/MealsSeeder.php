@@ -17,6 +17,7 @@ class MealsSeeder extends Seeder
         $meals = [
             [
                 'name' => 'Bolognese Pasta',
+                'user_id' => 1,
                 'calories' => 165,
                 'protein' => 31,
                 'carbohydrates' => 0,
@@ -27,6 +28,7 @@ class MealsSeeder extends Seeder
             ],
             [
                 'name' => 'Chicken And Rice',
+                'user_id' => 1,
                 'calories' => 55,
                 'protein' => 4,
                 'carbohydrates' => 11,
@@ -37,6 +39,7 @@ class MealsSeeder extends Seeder
             ],
             [
                 'name' => 'Beef Stir Fry',
+                'user_id' => 1,
                 'calories' => 215,
                 'protein' => 5,
                 'carbohydrates' => 45,
@@ -47,6 +50,7 @@ class MealsSeeder extends Seeder
             ],
             [
                 'name' => 'Sweet and sour beef',
+                'user_id' => 1,
                 'calories' => 233,
                 'protein' => 25,
                 'carbohydrates' => 0,
@@ -57,6 +61,7 @@ class MealsSeeder extends Seeder
             ],
             [
                 'name' => 'Greek Yogurt',
+                'user_id' => 1,
                 'calories' => 100,
                 'protein' => 10,
                 'carbohydrates' => 5,
