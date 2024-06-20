@@ -13,6 +13,7 @@ class Exercise extends Model
     protected $fillable = [
         'name',
         'reps',
+        'rest',
         'sets',
         'weight'
     ];
