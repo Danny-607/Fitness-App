@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\MealController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WorkoutController;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\DashboardController;
 
@@ -26,7 +27,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/meals', [MealController::class, 'store'])->name('meals.store');
     Route::get('exercises/create', [ExerciseController::class, 'create'])->name('exercises.create');
     Route::post('exercises', [ExerciseController::class, 'store'])->name('exercises.store');
-
+    Route::get('workouts/create', [WorkoutController::class, 'create'])->name('workouts.create');
+    Route::post('workouts', [WorkoutController::class, 'store'])->name('workouts.store');
 });
 
 require __DIR__.'/auth.php';
