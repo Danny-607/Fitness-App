@@ -1,16 +1,18 @@
 <script setup>
 import GuestLayout from '@/Layouts/GuestLayout.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
 const form = useForm({
-    name: '',
+    first_name: '',
+    last_name: '',
     email: '',
     password: '',
     password_confirmation: '',
+    height: '',
+    weight: '',
+    date_of_birth: '',
+    gender: '',
+    activity_level: '',
 });
 
 const submit = () => {
@@ -25,79 +27,37 @@ const submit = () => {
         <Head title="Register" />
 
         <form @submit.prevent="submit">
-            <div>
-                <InputLabel for="name" value="Name" />
+            <label for="first_name">Enter your first name</label>
+            <input type="text" id="first_name" v-model="form.first_name">
+            <label for="last_name">Enter your last name</label>
+            <input type="text" id="last_name" v-model="form.last_name">
+            <label for="email">Enter your email</label>
+            <input type="email" id="email" v-model="form.email">
+            <label for="password">Enter your password</label>
+            <input type="password" id="password" v-model="form.password">
+            <label for="password_confirmation">Confirm your password</label>
+            <input type="password" id="password_confirmation" v-model="form.password_confirmation">
+            <label for="height">Enter your height</label>
+            <input type="number" id="height" v-model="form.height">
+            <label for="weight">Enter your weight</label>
+            <input type="number" id="weight" v-model="form.weight">
+            <label for="date_of_birth">Enter your date of birth</label>
+            <input type="date" id="date_of_birth" v-model="form.date_of_birth">
+            <label for="activity_level">Enter your activity level</label>
+            <select id="activity_level" v-model="form.activity_level">
+                <option value="sedentary">Sedentary: Little to no exercise.</option>
+                <option value="light">Light: Exercise 1-3 times per week</option>
+                <option value="moderate">Moderate: Exercise 4-5 times per week</option>
+                <option value="active">Active: Daily exercise or intense exercise 3-4 times per week</option>
+                <option value="very_active">Very active: Intense exercise 6-7 times per week</option>
+            </select>
 
-                <TextInput
-                    id="name"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.name"
-                    required
-                    autofocus
-                    autocomplete="name"
-                />
-
-                <InputError class="mt-2" :message="form.errors.name" />
-            </div>
-
-            <div class="mt-4">
-                <InputLabel for="email" value="Email" />
-
-                <TextInput
-                    id="email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    v-model="form.email"
-                    required
-                    autocomplete="username"
-                />
-
-                <InputError class="mt-2" :message="form.errors.email" />
-            </div>
-
-            <div class="mt-4">
-                <InputLabel for="password" value="Password" />
-
-                <TextInput
-                    id="password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password"
-                    required
-                    autocomplete="new-password"
-                />
-
-                <InputError class="mt-2" :message="form.errors.password" />
-            </div>
-
-            <div class="mt-4">
-                <InputLabel for="password_confirmation" value="Confirm Password" />
-
-                <TextInput
-                    id="password_confirmation"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password_confirmation"
-                    required
-                    autocomplete="new-password"
-                />
-
-                <InputError class="mt-2" :message="form.errors.password_confirmation" />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <Link
-                    :href="route('login')"
-                    class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                    Already registered?
-                </Link>
-
-                <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Register
-                </PrimaryButton>
-            </div>
+            <label for="gender">Enter your gender</label>
+            <select id="gender" v-model="form.gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+            <button type="submit">Register</button>
         </form>
     </GuestLayout>
 </template>

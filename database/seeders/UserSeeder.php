@@ -16,14 +16,15 @@ class UserSeeder extends Seeder
 
         $users = [
             [
-                'name' => 'Test User',
+                'first_name' => 'Test',
+                'last_name' => 'User',
                 'email' => 't@t.com',
                 'password' => bcrypt('password'),
                 'gender' => '1',
                 'date_of_birth' => '1990-01-01',
                 'height' => '67',
                 'weight' => '183',
-                'activity_level' => '1',
+                'activity_level' => 'light',
             ]
         ];
 

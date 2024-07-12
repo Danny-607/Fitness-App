@@ -30,22 +30,40 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        // dd($request->all());
+        // Validate the request data
+        $validated = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email',
+            'password' => ['required', 'confirmed'],
+            'weight' => 'required|integer',
+            'height' => 'required|integer',
+            'date_of_birth' => 'required|date',
+            'activity_level' => 'required',
+            'gender' => 'required|string'
         ]);
 
+        // Create the user
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'first_name' => $validated['first_name'],
+            'last_name' => $validated['last_name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+            'weight' => $validated['weight'],
+            'height' => $validated['height'],
+            'date_of_birth' => $validated['date_of_birth'],
+            'activity_level' => $validated['activity_level'],
+            'gender' => $validated['gender'],
         ]);
 
+        // Fire the Registered event
         event(new Registered($user));
 
+        // Log the user in
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        // Redirect to the dashboard
+        return redirect()->route('dashboard');
     }
 }
