@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+    // Change so that only today's meals are sent to the frontend
     public function index(Request $request)
     {
         $user = $request->user();
@@ -26,6 +27,7 @@ class DashboardController extends Controller
             'exercises' => $exercises,
             'dailyMeals' => $dailyMeals,
             'workouts' => $workouts,
+
         ]);
     }
 }
