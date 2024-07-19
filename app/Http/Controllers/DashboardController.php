@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Meal;
 use Inertia\Inertia;
 use App\Models\Workout;
@@ -16,9 +17,13 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-
+        $today = Carbon::today();
         $exercises = Exercise::where('user_id', $user->id)->get();
-        $dailyMeals = DailyMeal::where('user_id', $user->id)->with('meal')->get();
+        $dailyMeals = DailyMeal::where('user_id', $user->id)
+                               ->whereDate('created_at', $today)
+                               ->with('meal')
+                               ->get();
+        $meals = Meal::where('user_id', $user->id)->get();
         $workouts = Workout::where('user_id', $user->id)->get();
 
 
@@ -27,7 +32,10 @@ class DashboardController extends Controller
             'exercises' => $exercises,
             'dailyMeals' => $dailyMeals,
             'workouts' => $workouts,
+            'meals' => $meals,
 
         ]);
     }
+
+
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WorkoutController;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DailymealsController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -29,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::post('exercises', [ExerciseController::class, 'store'])->name('exercises.store');
     Route::get('workouts/create', [WorkoutController::class, 'create'])->name('workouts.create');
     Route::post('workouts', [WorkoutController::class, 'store'])->name('workouts.store');
+    Route::post('dailymeals', [DailymealsController::class, 'store'])->name('dailymeals.store');
 });
 
 require __DIR__.'/auth.php';

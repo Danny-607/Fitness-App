@@ -1,10 +1,11 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
 import PieChart from '@/Components/PieChart.vue';
+import {Head, useForm} from '@inertiajs/vue3';
 
 const props = defineProps({
     dailyMeals: Object,
+    meals: Array,
 });
 
 let mealData = [];
@@ -26,7 +27,18 @@ for(let i = 0; i < mealData.length; i++) {
     fatsData.push(mealData[i].fat);
     sugarsData.push(mealData[i].sugar);
 }
-console.log(sugarsData);
+const form = useForm({
+
+    meal_id: '',
+
+
+});
+const submit = () => {
+    form.post(route('dailymeals.store'), {
+        onFinish: () => form.reset('meal')
+    });
+};
+
 </script>
 
 <template>
@@ -59,6 +71,16 @@ console.log(sugarsData);
                 <PieChart title="Sugars" :labels="labels" :chartData="sugarsData"/>
             </div>
 
+            <form @submit="submit">
+
+            <label for="">Add a new meal</label>
+            <select name="meal" id="meal" v-model="form.meal_id">
+                <option v-for="meal in meals" :key="meal.id" :value="meal.id">{{ meal.name }}</option>
+            </select>
+
+
+            <button type="submit">Submit</button>
+            </form>
         </section>
     </div>
     </AuthenticatedLayout>
