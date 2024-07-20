@@ -18,9 +18,16 @@ class WorkoutController extends Controller
 
         $data = $request->validate([
             'name' => 'required',
-            'exercise_id' => 'required',
+            'exercise_ids' => 'required',
         ]);
-        auth()->user()->workouts()->create($data);
+        $name = $data['name'];
+        $exercises = $data['exercise_ids'];
+        foreach ($exercises as $exercise_id) {
+            auth()->user()->workouts()->create([
+                'name' => $name,
+                'exercise_id' => $exercise_id,
+            ]);
+        }
 
         return redirect()->route('dashboard');
     }
