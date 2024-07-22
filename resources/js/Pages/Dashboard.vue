@@ -2,7 +2,11 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import PieChart from '@/Components/PieChart.vue';
 import {Head, useForm} from '@inertiajs/vue3';
+import NavBar from '@/Components/NavBar.vue';
+import {defineProps} from 'vue';
+import {ref} from 'vue';
 
+let labels = [];
 const props = defineProps({
     dailyMeals: Object,
     meals: Array,
@@ -26,6 +30,7 @@ for(let i = 0; i < mealData.length; i++) {
     carbsData.push(mealData[i].carbohydrates);
     fatsData.push(mealData[i].fat);
     sugarsData.push(mealData[i].sugar);
+    labels.push(mealData[i].name );
 }
 const form = useForm({
 
@@ -37,6 +42,7 @@ const submit = () => {
     form.post(route('dailymeals.store'), {
         onFinish: () => form.reset('meal')
     });
+
 };
 
 </script>
