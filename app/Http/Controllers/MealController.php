@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class MealController extends Controller
 {
     public function create(){
+        $user = auth()->user();
         return Inertia::render('Meals/Create', [
             'meal' => [
                 'name' => '',
@@ -18,6 +19,7 @@ class MealController extends Controller
                 'fat' => '',
                 'sugar' => '',
             ],
+            'user' => $user
         ]);
     }
     public function store(Request $request){

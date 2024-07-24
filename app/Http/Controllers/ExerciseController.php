@@ -9,7 +9,18 @@ class ExerciseController extends Controller
 {
     public function create()
     {
-        return Inertia::render('Exercises/Create');
+        $user = auth()->user();
+        return Inertia::render('Exercises/Create', [
+            'exercise' => [
+                'name' => '',
+                'reps' => '',
+                'sets' => '',
+                'rest' => '',
+                'weight' => '',
+            ],
+            'user' => $user
+        ]);
+
     }
 
     public function store(Request $request)

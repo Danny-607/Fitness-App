@@ -9,8 +9,10 @@ class WorkoutController extends Controller
 {
     public function create(){
         $exercises = auth()->user()->exercises;
+        $user = auth()->user();
         return Inertia::render('Workouts/Create', [
             'exercises' => $exercises,
+            'user' => $user
         ]);
     }
 

@@ -1,12 +1,11 @@
 <template>
-    <Pie class="pie-chart" :data="chartData" :options="chartOptions" :labels="labels" />
+    <Pie class="pie-chart" :data="computedChartData" :options="chartOptions" :width="size" :height="size"/>
 </template>
 
 <script>
 import { Pie } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js'
 
-// Register Chart.js components
 ChartJS.register(Title, Tooltip, Legend, ArcElement);
 
 export default {
@@ -27,21 +26,30 @@ export default {
             type: Array,
             required: true,
         },
+        size: {
+            type: Number,
+            default: 400,
+        },
     },
-    data() {
-        return {
-            chartData: {
+    computed: {
+        computedChartData() {
+            return {
                 labels: this.labels,
                 datasets: [{
                     data: this.chartData,
                     backgroundColor: ['#E7823A', '#546E7A', '#F9A825', '#F9A825']
                 }]
-            },
+            };
+        },
+    },
+    data() {
+        return {
             chartOptions: {
-                responsive: true,
+                responsive: false,
+                maintainAspectRatio: false,
                 plugins: {
                     legend: {
-                        position: 'top',
+                        position: 'bottom',
                     },
                     title: {
                         display: true,
@@ -50,14 +58,13 @@ export default {
                 },
             },
         };
-
     },
 };
 </script>
 
 <style scoped>
 .pie-chart {
-    max-width: 400px;
+    max-width: 100%;
     margin: 0 auto;
 }
 </style>
