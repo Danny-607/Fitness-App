@@ -1,6 +1,10 @@
 <script setup>
 import {Head, useForm} from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+
+const props = defineProps({
+    user: Object,
+});
 const form = useForm({
     name: null,
     calories: null,
@@ -8,7 +12,6 @@ const form = useForm({
     carbohydrates: null,
     fat: null,
     sugar: null,
-    user: Object,
 });
 const submit = () => {
     form.post(route('meals.store'), {
