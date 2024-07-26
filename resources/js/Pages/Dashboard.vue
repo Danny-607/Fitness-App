@@ -1,7 +1,6 @@
 <script setup>
 import PieChart from '@/Components/PieChart.vue';
 import { Head, useForm } from '@inertiajs/vue3';
-import NavBar from '@/Components/NavBar.vue';
 import { defineProps, ref } from 'vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 
@@ -17,11 +16,11 @@ for (let i = 0; i < props.dailyMeals.length; i++) {
     mealData.push(props.dailyMeals[i].meal);
 }
 
-const caloriesData = []
-const proteinData = []
-const carbsData = []
-const fatsData = []
-const sugarsData = []
+const caloriesData = [];
+const proteinData = [];
+const carbsData = [];
+const fatsData = [];
+const sugarsData = [];
 
 for (let i = 0; i < mealData.length; i++) {
     caloriesData.push(mealData[i].calories);
@@ -57,105 +56,61 @@ const closeModal = () => {
     <Head title="Dashboard" />
 
     <AuthenticatedLayout :user="user">
-    <div>
+        <div class="container mt-5">
+            <section class="macro-nutrients mb-4">
+                <h2 class="text-center">Calorie budget</h2>
+                <PieChart title="Calories" :labels="labels" :chartData="caloriesData" :size="400" />
+                <p id="calories-stats"></p>
+                <div class="d-flex justify-content-center">
+                    <button @click="openModal" class="btn btn-primary mt-3">Add a new meal</button>
+                </div>
+            </section>
 
-        <h1>Dashboard</h1>
+            <section class="macro-nutrients row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <PieChart title="Protein" :labels="labels" :chartData="proteinData" :size="300" />
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <PieChart title="Carbohydrates" :labels="labels" :chartData="carbsData" :size="300" />
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <PieChart title="Fats" :labels="labels" :chartData="fatsData" :size="300" />
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <PieChart title="Sugars" :labels="labels" :chartData="sugarsData" :size="300" />
+                </div>
+            </section>
 
-        <section class="macro-nutrients">
-            <h2>Calorie budget</h2>
-            <PieChart title="Calories" :labels="labels" :chartData="caloriesData" :size="400" />
-            <p id="calories-stats"></p>
-        <button @click="openModal" class="open-modal-button">Add a new meal</button>
-
-        </section>
-
-        <section class="macro-nutrients smaller-charts">
-            <PieChart title="Protein" :labels="labels" :chartData="proteinData" :size="300" />
-            <PieChart title="Carbohydrates" :labels="labels" :chartData="carbsData" :size="300" />
-            <PieChart title="Fats" :labels="labels" :chartData="fatsData" :size="300" />
-            <PieChart title="Sugars" :labels="labels" :chartData="sugarsData" :size="300" />
-        </section>
-
-
-        <div v-if="showModal" class="modal-overlay">
-            <div class="modal">
-                <span class="close-button" @click="closeModal">&times;</span>
-                <form @submit="submit">
-                    <label for="meal">Add a new meal</label>
-                    <select name="meal" id="meal" v-model="form.meal_id">
-                        <option v-for="meal in meals" :key="meal.id" :value="meal.id">{{ meal.name }}</option>
-                    </select>
-                    <button type="submit">Submit</button>
-                </form>
+            <div v-if="showModal" class="modal fade show d-block " tabindex="-1" role="dialog" style="background-color: rgba(0,0,0,0.5);">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <label for="meal" class="modal-title">Add a new meal</label>
+                            <button type="button" class="btn-close" @click="closeModal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form @submit="submit">
+                                <div class="mb-3">
+                                    <select name="meal" id="meal" v-model="form.meal_id" class="form-select">
+                                        <option v-for="meal in meals" :key="meal.id" :value="meal.id">{{ meal.name }}</option>
+                                    </select>
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</AuthenticatedLayout>
+    </AuthenticatedLayout>
 </template>
 
 <style scoped>
-.macro-nutrients {
-    display: flex;
-    flex-direction: column;
+.modal.fade.show.d-block {
+    display: flex !important;
     align-items: center;
-    margin-bottom: 20px;
-
-}
-
-.macro-nutrients.smaller-charts {
-    flex-direction: row;
-    justify-content: space-around;
-    width: 100%;
-    max-width: 100vw;
-}
-
-.open-modal-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.open-modal-button:hover {
-    background-color: #0056b3;
-}
-
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
     justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.modal {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 300px;
-    position: relative;
-}
-
-.close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 24px;
-    color: #aaa;
-}
-
-.close-button:hover {
-    color: #000;
 }
 </style>
