@@ -9,7 +9,7 @@ A fitness application that allows users to create an account, log in, and track 
 - Create individual exercises to add to workout plans - [ x ]
 - Meal tracking - [ x ]
 - Progress Tracking - [ x ]
-- Goal Setting
+- Goal Setting - [  ]
 - Macro Nutrient Tracking - [ x ]
 - Calorie Tracking - [ x ]
 - Automated Calculations for Caloric Intake through BMR and TDEE  - [  ] (Partially integrated)
