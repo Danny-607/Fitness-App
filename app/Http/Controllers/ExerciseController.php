@@ -50,6 +50,6 @@ class ExerciseController extends Controller
             'rest' => $request->rest,
             'weight' => $request->weight,
         ]);
-        return redirect()->route('dashboard');
+        return redirect()->route('workouts.index');
     }
 }
