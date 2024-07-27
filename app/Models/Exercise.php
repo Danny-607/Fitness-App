@@ -25,6 +25,6 @@ class Exercise extends Model
 
     public function workout()
     {
-        return $this->hasMany(Workout::class);
+        return $this->belongsToMany(Workout::class)->withPivot('reps', 'rest', 'sets', 'weight');
     }
 }

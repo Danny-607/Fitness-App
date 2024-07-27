@@ -10,6 +10,7 @@ use Database\Seeders\MealsSeeder;
 use Database\Seeders\WorkoutSeeder;
 use Database\Seeders\ExercisesSeeder;
 use Database\Seeders\DailyMealsSeeder;
+use Database\Seeders\WorkoutExerciseSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -26,6 +27,7 @@ class DatabaseSeeder extends Seeder
             DailyMealsSeeder::class,
             ExercisesSeeder::class,
             WorkoutSeeder::class,
+            WorkoutExerciseSeeder::class
 
         ]);
     }

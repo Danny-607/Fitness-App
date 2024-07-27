@@ -15,12 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('name');
-            $table->integer('reps');
-            $table->integer('sets');
-            $table->integer('rest');
-            $table->integer('weight');
-
-
             $table->timestamps();
         });
     }

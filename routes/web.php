@@ -28,7 +28,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/meals', [MealController::class, 'store'])->name('meals.store');
     Route::get('exercises/create', [ExerciseController::class, 'create'])->name('exercises.create');
     Route::post('exercises', [ExerciseController::class, 'store'])->name('exercises.store');
+    Route::get('workouts/dashboard', [WorkoutController::class, 'index'])->name('workouts.index');
     Route::get('workouts/create', [WorkoutController::class, 'create'])->name('workouts.create');
+    Route::get('workouts/{id}', [WorkoutController::class, 'show'])->name('workouts.show');
     Route::post('workouts', [WorkoutController::class, 'store'])->name('workouts.store');
     Route::post('dailymeals', [DailymealsController::class, 'store'])->name('dailymeals.store');
 });
