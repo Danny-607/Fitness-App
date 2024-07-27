@@ -14,11 +14,9 @@ const logout = () => {
 <template>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <div class="navbar-nav">
+            <div class="navbar-nav ">
                 <Link class="nav-link" :href="route('dashboard')">Dashboard</Link>
-                <Link class="nav-link" :href="route('meals.create')">Create meal</Link>
-                <Link class="nav-link" :href="route('workouts.create')">Create workout</Link>
-                <Link class="nav-link" :href="route('exercises.create')">Create exercise</Link>
+                <Link class="nav-link" :href="route('workouts.index')">Workout Dashboard</Link>
             </div>
             <div class="ml-auto d-flex align-items-center">
                 <span class="mr-3 font-weight-bold">{{ props.user.first_name }} {{ props.user.last_name }}</span>
@@ -30,5 +28,4 @@ const logout = () => {
 </template>
 
 <style scoped>
-/* Custom styles can be added here if needed */
 </style>

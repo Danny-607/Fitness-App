@@ -3,6 +3,7 @@ import PieChart from '@/Components/PieChart.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import { defineProps, ref } from 'vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import { Link} from '@inertiajs/vue3';
 
 let labels = [];
 const props = defineProps({
@@ -62,6 +63,7 @@ const closeModal = () => {
                 <PieChart title="Calories" :labels="labels" :chartData="caloriesData" :size="400" />
                 <p id="calories-stats"></p>
                 <div class="d-flex justify-content-center">
+                    <Link :href="route('meals.create')" class="btn btn-success mt-3 mr-3">Create a new meal</Link>
                     <button @click="openModal" class="btn btn-primary mt-3">Add a new meal</button>
                 </div>
             </section>

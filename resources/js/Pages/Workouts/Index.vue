@@ -23,7 +23,10 @@ console.log(props.user);
                             <ul class="list-group list-group-flush">
                                 <li v-for="exercise in workout.exercises" :key="exercise.id" class="list-group-item">{{ exercise.name }}</li>
                             </ul>
-                            <Link :href="route('workouts.show', workout.id)" class="btn btn-primary mt-3">Dashboard</Link>
+                            <div class="d-flex justify-content-end">
+                                <Link :href="route('exercises.create')" class="btn btn-success mt-3 mr-3">Add new exercise</Link>
+                                <Link :href="route('workouts.show', workout.id)" class="btn btn-primary mt-3">View Plan</Link>
+                            </div>
                         </div>
                     </div>
                 </div>
